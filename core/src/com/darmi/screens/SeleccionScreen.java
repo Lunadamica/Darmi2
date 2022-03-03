@@ -22,11 +22,11 @@ public class SeleccionScreen extends BaseScreen{
         stage = new Stage(new FitViewport(640, 360));
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         fondo=new Image(game.getManager().get("bandera.jpg", Texture.class));
-        blue = new TextButton("Blue", skin);
-        red = new TextButton("Red", skin);
-        green = new TextButton("Green", skin);
-        yellow = new TextButton("Yellow", skin);
-        black = new TextButton("Black", skin);
+        blue = new TextButton("Azul", skin);
+        red = new TextButton("Rojo", skin);
+        green = new TextButton("Verde", skin);
+        yellow = new TextButton("Amarillo", skin);
+        black = new TextButton("Negro", skin);
         volver = new TextButton("Volver", skin);
         azul=new Image(game.getManager().get("car_blue_1.png",Texture.class));
         amarillo=new Image(game.getManager().get("car_yellow_1.png",Texture.class));

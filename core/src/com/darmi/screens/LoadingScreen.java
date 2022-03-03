@@ -20,7 +20,7 @@ public class LoadingScreen extends BaseScreen{
         this.game=game;
         stage=new Stage(new FitViewport(640,360));
         skin=new Skin(Gdx.files.internal("skin/uiskin.json"));
-        loading=new Label("Loading...",skin);
+        loading=new Label("Cargando...",skin);
         loading.setPosition(320-loading.getWidth()/2,180-loading.getHeight()/2);
         stage.addActor(loading);
     }
@@ -35,7 +35,7 @@ public class LoadingScreen extends BaseScreen{
             game.finishLoading();
         }else{
             int progress=(int)(game.getManager().getProgress()*100);
-            loading.setText("Loading..."+progress+"%");
+            loading.setText("Cargando..."+progress+"%");
 
         }
 

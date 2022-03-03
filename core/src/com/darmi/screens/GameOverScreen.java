@@ -15,7 +15,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 public class GameOverScreen extends BaseScreen{
     private Stage stage;
     private Skin skin;
-    private TextButton volver, jugar;
+    private TextButton volver, jugar,ranking;
     private Label tiempo, resultado;
     private Image fondo;
     //Tiempo que ha durado la partida
@@ -32,8 +32,9 @@ public class GameOverScreen extends BaseScreen{
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         volver = new TextButton("Volver al menu", skin);
         jugar = new TextButton("Volver a jugar", skin);
-        tiempo=new Label("Tu tiempo es: ",skin);
-        resultado=new Label(seg+"S",skin);
+        ranking = new TextButton("Ranking", skin);
+        tiempo=new Label("Tu tiempo: ",skin);
+        resultado=new Label(seg+"Seg",skin);
 
 
         volver.addCaptureListener(new ChangeListener() {
@@ -49,13 +50,23 @@ public class GameOverScreen extends BaseScreen{
                 game.setScreen(game.seleccionScreen);
             }
         });
+
+        ranking.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.menuScreen);
+            }
+        });
+
         fondo.setSize(630,450);
-        tiempo.setPosition(255,230);
+        tiempo.setPosition(280,230);
         jugar.setSize(150, 50);
         jugar.setPosition(45, 80);
         volver.setSize(150, 50);
-        volver.setPosition(420, 80);
-        resultado.setPosition(295,180);
+        volver.setPosition(430, 80);
+        ranking.setSize(150, 50);
+        ranking.setPosition(245, 80);
+        resultado.setPosition(300,180);
 
 
         stage.addActor(fondo);
@@ -63,6 +74,7 @@ public class GameOverScreen extends BaseScreen{
         stage.addActor(volver);
         stage.addActor(jugar);
         stage.addActor(resultado);
+        stage.addActor(ranking);
     }
     @Override
     public void show() {

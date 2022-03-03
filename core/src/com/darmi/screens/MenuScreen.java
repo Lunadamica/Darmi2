@@ -24,10 +24,10 @@ public class MenuScreen extends BaseScreen{
         skin= new Skin(Gdx.files.internal("skin/uiskin.json"));
         logo=new Image(game.getManager().get("logo.png", Texture.class));
         fondo=new Image(game.getManager().get("fondo.png",Texture.class));
-        play=new TextButton("Play", skin);
+        play=new TextButton("Jugar", skin);
         creditos=new TextButton("Creditos", skin);
         ranking=new TextButton("Ranking", skin);
-        exit=new TextButton("Exit", skin);
+        exit=new TextButton("Salir", skin);
 
 
         play.addCaptureListener(new ChangeListener() {

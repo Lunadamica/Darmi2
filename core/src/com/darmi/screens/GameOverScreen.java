@@ -21,6 +21,7 @@ public class GameOverScreen extends BaseScreen{
     //Tiempo que ha durado la partida
     private long min;
     private long seg;
+    private String fin;
 
 
     public GameOverScreen(final MainGame game) {
@@ -28,6 +29,7 @@ public class GameOverScreen extends BaseScreen{
         //damos valor por defecto a los minutos y a los segundos
         min=0;
         seg=0;
+        fin="";
         //Instanciamos nuestro fondo
         fondo=new Image(game.getManager().get("podium.jpg", Texture.class));
         //definimos el stage
@@ -115,13 +117,13 @@ public class GameOverScreen extends BaseScreen{
 
     //Metodo para obtener el tiempo que ha transcurrido de partida
     public String escribirTiempo(long time){
-        String fin="";
         seg=time;
         //si los segundos superan los 60, sumamos un minuto y le
         //restamos el valor correspondiente a la variable de segundos
-        if(seg>60){
+        if(seg>10){
+            resultado.setPosition(270,180);
             min=min+1;
-            seg=time-(min*60);
+            seg=time-(min*10);
             fin=min+" Min "+seg+" Seg";
 
         }else{
@@ -131,6 +133,10 @@ public class GameOverScreen extends BaseScreen{
         //cambiamos la label del resultado con los datos obtenidos
         resultado.setText(fin);
         //Retornamos la label para poder disponer del String que guarda el tiempo
+        return fin;
+    }
+
+    public String getFin() {
         return fin;
     }
 }

@@ -99,7 +99,7 @@ public class GameScreen extends BaseScreen {
         vehiclesRespawn = new Chronometer();
         vehiclesRespawn.run(3000);
         levelUp = new Chronometer();
-        levelUp.run(250000);
+        levelUp.run(25000);
         level = 0;
         vehicleTextures = new ArrayList<>();
         vehicleTextures.add(game.getManager().<Texture>get("car_green_1.png"));
@@ -179,7 +179,7 @@ public class GameScreen extends BaseScreen {
         time=this.delta/1000;
         if(choque){
             choque = false;
-            game.gameOverScreen.escribirTiempo(time);
+//            game.gameOverScreen.escribirTiempo(time);
             game.setScreen(game.gameOverScreen);
         }
         tiempo.setText(game.gameOverScreen.escribirTiempo(time));

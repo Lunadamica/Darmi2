@@ -32,12 +32,10 @@ public class GameScreen extends BaseScreen {
     private Stage stage,stage2;
     //Box2D
     private World world;
-    private Box2DDebugRenderer renderer;
 
     //Screen
     private Camera camara;
     private Viewport ventana;
-
 
     //graphics
     private SpriteBatch loteSprites;
@@ -91,7 +89,6 @@ public class GameScreen extends BaseScreen {
         stage2 = new Stage(new FitViewport(640,360));
         stage = new Stage(new FitViewport(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT));
         world = new World(new Vector2(0, 0), true);
-        renderer = new Box2DDebugRenderer();
         loteSprites=new SpriteBatch();
         camara = new OrthographicCamera();
         ventana=new StretchViewport(Constants.WORLD_WIDTH,Constants.WORLD_HEIGHT,camara);
@@ -102,7 +99,7 @@ public class GameScreen extends BaseScreen {
         vehiclesRespawn = new Chronometer();
         vehiclesRespawn.run(3000);
         levelUp = new Chronometer();
-        levelUp.run(25000);
+        levelUp.run(250000);
         level = 0;
         vehicleTextures = new ArrayList<>();
         vehicleTextures.add(game.getManager().<Texture>get("car_green_1.png"));
@@ -244,11 +241,13 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void dispose() {
-        //eliminamos los stages, el mundo y las skin
+        //eliminamos recursos para evitar que se queden procesos abiertos
         stage.dispose();
         stage2.dispose();
         world.dispose();
         skin.dispose();
+        loteSprites.dispose();
+        musica.dispose();
     }
 
 }

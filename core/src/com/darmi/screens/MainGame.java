@@ -13,6 +13,7 @@ public class MainGame extends Game {
 	protected SeleccionScreen seleccionScreen;
 	protected LoadingScreen loadingScreen;
 	protected GameOverScreen gameOverScreen;
+	protected RankingScreen rankingScreen;
 	protected Texture texture;
 
 	public AssetManager getManager() {
@@ -21,7 +22,7 @@ public class MainGame extends Game {
 
 	@Override
 	public void create() {
-
+		//Instanciamos el manager
 		manager = new AssetManager();
 		//cargo en el manager todos mis recursos
 		manager.load("logo.png",Texture.class);
@@ -30,13 +31,14 @@ public class MainGame extends Game {
 		manager.load("bandera.jpg",Texture.class);
 		manager.load("cocheDeco.png",Texture.class);
 		manager.load("podium.jpg",Texture.class);
+		manager.load("ranking.png",Texture.class);
 		manager.load("car_blue_1.png",Texture.class);
 		manager.load("car_red_1.png",Texture.class);
 		manager.load("car_green_1.png",Texture.class);
 		manager.load("car_black_1.png",Texture.class);
 		manager.load("car_yellow_1.png",Texture.class);
 		manager.load("song.ogg", Music.class);
-//		manager.finishLoading();
+		//Instanciamos una textura por defecto que usaremos para el coche del jugador
 		texture=new Texture("car_blue_1.png");
 
 		//Instancio mis ventanas
@@ -45,11 +47,14 @@ public class MainGame extends Game {
 	}
 
 	public void finishLoading(){
+		//Termino de cargar mis pantalla
 		menuScreen=new MenuScreen(this);
 		gameScreen=new GameScreen(this);
 		creditsScreen=new CreditsScreen(this);
 		seleccionScreen=new SeleccionScreen(this);
 		gameOverScreen=new GameOverScreen(this);
+		rankingScreen=new RankingScreen(this);
+		//Cambio la pantalla al menu principal
 		setScreen(menuScreen);
 	}
 }

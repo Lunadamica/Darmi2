@@ -19,42 +19,49 @@ public class MenuScreen extends BaseScreen{
 
     public MenuScreen(final MainGame game) {
         super(game);
+        //definimos el stage
         stage=new Stage(new FitViewport(640,360));
-
+        //instanciamos las skins
         skin= new Skin(Gdx.files.internal("skin/uiskin.json"));
+        //Instanciamos la imagen del logo y el fondo
         logo=new Image(game.getManager().get("logo.png", Texture.class));
         fondo=new Image(game.getManager().get("fondo.png",Texture.class));
+        //Instanciamos los botones del menu
         play=new TextButton("Jugar", skin);
         creditos=new TextButton("Creditos", skin);
         ranking=new TextButton("Ranking", skin);
         exit=new TextButton("Salir", skin);
 
-
+        //El boton play nos llevara la pantalla de seleccion de jugador
         play.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.seleccionScreen);
             }
         });
+        //el boton de creditos nos llevara a la pantalla de creditos
         creditos.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.creditsScreen);
             }
         });
+        //el boton del ranking nos llevara a la pantalla de ranking
         ranking.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-//                game.setScreen(game.creditsScreen);
-                System.out.println("RANKING");
+                game.setScreen(game.rankingScreen);
             }
         });
+        //el boton exit nos ayudara a salir del juego
         exit.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
             }
         });
+
+        //Asignamos tamaño y posicion a nuestros elementos que cargaremos en la pantalla
         fondo.setSize(800,600);
         logo.setSize(300,300);
         logo.setPosition(((stage.getWidth()-logo.getWidth())/2)/2-100,(stage.getHeight()-logo.getHeight())/2);
@@ -66,6 +73,8 @@ public class MenuScreen extends BaseScreen{
         creditos.setPosition(((stage.getWidth()-play.getWidth())/2)*2-100,stage.getHeight()/2-45);
         exit.setSize(200,50);
         exit.setPosition(((stage.getWidth()-play.getWidth())/2)*2-100,(stage.getHeight()/2)-120);
+
+        //Añadimos todos estos recursos como actores del stage
         stage.addActor(fondo);
         stage.addActor(logo);
         stage.addActor(play);
@@ -75,17 +84,22 @@ public class MenuScreen extends BaseScreen{
     }
     @Override
     public void show() {
+        //Se ejecuta solo cuando se inicia la pantalla
+        //Procesa todos los procesos del stage
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void hide() {
+        //Cuando cerramos la pantalla ponemos a null este InputProcessor
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
+        //eliminamos el stage y las skin
         stage.dispose();
+        skin.dispose();
     }
 
     @Override

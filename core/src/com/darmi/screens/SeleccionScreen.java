@@ -19,21 +19,28 @@ public class SeleccionScreen extends BaseScreen{
 
     public SeleccionScreen(final MainGame game) {
         super(game);
+        //definimos el stage
         stage = new Stage(new FitViewport(640, 360));
+        //instanciamos las skins
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
+        //instanciamos el fondo
         fondo=new Image(game.getManager().get("bandera.jpg", Texture.class));
+        //creamos los botones de colores y las imagenes de los recursos que cargara
         blue = new TextButton("Azul", skin);
         red = new TextButton("Rojo", skin);
         green = new TextButton("Verde", skin);
         yellow = new TextButton("Amarillo", skin);
         black = new TextButton("Negro", skin);
-        volver = new TextButton("Volver", skin);
+
         azul=new Image(game.getManager().get("car_blue_1.png",Texture.class));
         amarillo=new Image(game.getManager().get("car_yellow_1.png",Texture.class));
         rojo=new Image(game.getManager().get("car_red_1.png",Texture.class));
         negro=new Image(game.getManager().get("car_black_1.png",Texture.class));
         verde=new Image(game.getManager().get("car_green_1.png",Texture.class));
+        //Definimos un boton volver
+        volver = new TextButton("Volver", skin);
 
+        //Les asignamos a cada boton el recurso del coche que cargara y cambiara de pantalla al juego con el recurso cargado
         blue.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -78,12 +85,15 @@ public class SeleccionScreen extends BaseScreen{
                 game.setScreen(game.gameScreen);
             }
         });
+        //Definimos un boton para volver a la pantalla de menu
         volver.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.menuScreen);
             }
         });
+
+        //Asignamos tamaño y posicion a nuestros elementos que cargaremos en la pantalla
         azul.setSize(100,50);
         azul.setPosition(80,260);
         blue.setSize(100, 50);
@@ -107,6 +117,7 @@ public class SeleccionScreen extends BaseScreen{
 
         volver.setPosition(550, 25);
 
+        //Añadimos todos estos recursos como actores del stage
         stage.addActor(fondo);
         stage.addActor(blue);
         stage.addActor(red);
@@ -123,24 +134,30 @@ public class SeleccionScreen extends BaseScreen{
 
     @Override
     public void show() {
+        //Se ejecuta solo cuando se inicia la pantalla
+        //Procesa todos los procesos del stage
         Gdx.input.setInputProcessor(stage);
     }
 
     @Override
     public void hide() {
+        //Cuando cerramos la pantalla ponemos a null este InputProcessor
         Gdx.input.setInputProcessor(null);
     }
 
     @Override
     public void dispose() {
+        //eliminamos el stage y las skin
         stage.dispose();
         skin.dispose();
     }
 
     @Override
     public void render(float delta) {
+        //pintamos el fondo de negro
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        //Actalizamos y pintamos el stage
         stage.act();
         stage.draw();
     }

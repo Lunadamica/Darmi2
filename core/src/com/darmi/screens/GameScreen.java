@@ -152,6 +152,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void show() {
+        //Se ejecuta solo cuando se inicia la pantalla
         Texture jugadorTexture=game.texture;
         jugador=new PlayerEntity(world,jugadorTexture, new Vector2(5,30));
 
@@ -243,9 +244,11 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public void dispose() {
+        //eliminamos los stages, el mundo y las skin
         stage.dispose();
         stage2.dispose();
         world.dispose();
+        skin.dispose();
     }
 
 }

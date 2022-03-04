@@ -6,53 +6,57 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class CreditsScreen extends BaseScreen {
+public class RankingScreen extends BaseScreen{
     private Stage stage;
     private Skin skin;
-    private Label credits;
-    private TextButton back;
-    private Image coche;
+    private TextButton volver, jugar;
+    private Image fondo;
 
-    public CreditsScreen(final MainGame game) {
+    public RankingScreen(final MainGame game) {
         super(game);
-        //Instanciamos una imagen decorativa
-        coche=new Image(game.getManager().get("cocheDeco.png", Texture.class));
-        //definimos el stage
-        stage = new Stage(new FitViewport(640, 360));
-        //instanciamos las skins
+        //instanciamos el fondo
+        fondo=new Image(game.getManager().get("ranking.png", Texture.class));
+        //definimos el escenario
+        stage=new Stage(new FitViewport(640,360));
+        //instanciamos las skin
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
-        //Instanciamos un boton para volver
-        back = new TextButton("Volver", skin);
-        //Instanciamos una label que explicara el objetivo del juego y menciona los creadores
-        credits = new Label("\nJuego 2D de coches.\nAguanta el maximo tiempo posible en la carretera\nsin chocarte con otros vehiculos.\n\nTrabajo realizado por:\n Inmaculada Moran Rastrollo\nMiguel Angel Vaquero Mateos", skin);
+        //instanciamos el boton de volver al menu y volver a jugar
+        volver = new TextButton("Volver al menu", skin);
+        jugar = new TextButton("Volver a jugar", skin);
 
-        //Definimos un boton para volver a la pantalla de menu
-        back.addCaptureListener(new ChangeListener() {
+        //El boton volver nos llevara al menu principal
+        volver.addCaptureListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(game.menuScreen);
             }
         });
+        //El boton volver a jugar nos llevara a la pantalla de seleccion
+        //de coche nuevo para volver a jugar
+        jugar.addCaptureListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(game.seleccionScreen);
+            }
+        });
 
         //Asignamos tamaño y posicion a nuestros elementos que cargaremos en la pantalla
-        coche.setSize(250,250);
-        coche.setPosition(((stage.getWidth()-coche.getWidth())/2)*2-100,10);
-        credits.setPosition(20, 340 - credits.getHeight());
-        back.setSize(200, 80);
-        back.setPosition(40, 50);
+        fondo.setSize(630,450);
+        jugar.setSize(120, 40);
+        jugar.setPosition(90, 50);
+        volver.setSize(120, 40);
+        volver.setPosition(420, 50);
 
         //Añadimos todos estos recursos como actores del stage
-        stage.addActor(coche);
-        stage.addActor(back);
-        stage.addActor(credits);
+        stage.addActor(fondo);
+        stage.addActor(volver);
+        stage.addActor(jugar);
     }
-
     @Override
     public void show() {
         //Se ejecuta solo cuando se inicia la pantalla
@@ -78,7 +82,7 @@ public class CreditsScreen extends BaseScreen {
         //pintamos el fondo de negro
         Gdx.gl.glClearColor(0f, 0f, 0f, 1f);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        //Actualizamos y pintamos el stage
+        //Actalizamos y pintamos el stage
         stage.act();
         stage.draw();
     }

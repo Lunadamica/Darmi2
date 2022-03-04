@@ -17,6 +17,7 @@ public class RankingScreen extends BaseScreen{
     private TextButton volver, jugar;
     private Image fondo;
 
+
     public RankingScreen(final MainGame game) {
         super(game);
         //instanciamos el fondo

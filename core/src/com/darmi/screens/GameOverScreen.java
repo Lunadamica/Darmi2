@@ -12,10 +12,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
-public class GameOverScreen extends BaseScreen{
+public class GameOverScreen extends BaseScreen {
     private Stage stage;
     private Skin skin;
-    private TextButton volver, jugar,ranking;
+    private TextButton volver, jugar, ranking;
     private Label tiempo, resultado;
     private Image fondo;
     //Tiempo que ha durado la partida
@@ -27,21 +27,21 @@ public class GameOverScreen extends BaseScreen{
     public GameOverScreen(final MainGame game) {
         super(game);
         //damos valor por defecto a los minutos y a los segundos
-        min=0;
-        seg=0;
-        fin="";
+        min = 0;
+        seg = 0;
+        fin = "";
         //Instanciamos nuestro fondo
-        fondo=new Image(game.getManager().get("podium.jpg", Texture.class));
+        fondo = new Image(game.getManager().get("podium.jpg", Texture.class));
         //definimos el stage
-        stage=new Stage(new FitViewport(640,360));
+        stage = new Stage(new FitViewport(640, 360));
         //instanciamos las skins
         skin = new Skin(Gdx.files.internal("skin/uiskin.json"));
         //Instanciamos los botones y las labels que colocaremos en nuestra pantalla
         volver = new TextButton("Volver al menu", skin);
         jugar = new TextButton("Volver a jugar", skin);
         ranking = new TextButton("Ranking", skin);
-        tiempo=new Label("Tu tiempo: ",skin);
-        resultado=new Label(seg+"Seg",skin);
+        tiempo = new Label("Tu tiempo: ", skin);
+        resultado = new Label(seg + "Seg", skin);
 
         //Definimos un boton para volver a la pantalla de menu
         volver.addCaptureListener(new ChangeListener() {
@@ -67,15 +67,15 @@ public class GameOverScreen extends BaseScreen{
         });
 
         //Asignamos tamaño y posicion a nuestros elementos que cargaremos en la pantalla
-        fondo.setSize(630,450);
-        tiempo.setPosition(280,230);
+        fondo.setSize(630, 450);
+        tiempo.setPosition(280, 230);
         jugar.setSize(150, 50);
         jugar.setPosition(45, 80);
         volver.setSize(150, 50);
         volver.setPosition(430, 80);
         ranking.setSize(150, 50);
         ranking.setPosition(245, 80);
-        resultado.setPosition(300,180);
+        resultado.setPosition(300, 180);
 
         //Añadimos todos estos recursos como actores del stage
         stage.addActor(fondo);
@@ -85,6 +85,7 @@ public class GameOverScreen extends BaseScreen{
         stage.addActor(resultado);
         stage.addActor(ranking);
     }
+
     @Override
     public void show() {
         //Se ejecuta solo cuando se inicia la pantalla
@@ -115,28 +116,22 @@ public class GameOverScreen extends BaseScreen{
         stage.draw();
     }
 
-    //Metodo para obtener el tiempo que ha transcurrido de partida
-    public String escribirTiempo(long time){
-        seg=time;
-        //si los segundos superan los 60, sumamos un minuto y le
-        //restamos el valor correspondiente a la variable de segundos
-        if(seg>10){
-            resultado.setPosition(270,180);
-            min=min+1;
-            seg=time-(min*10);
-            fin=min+" Min "+seg+" Seg";
+    public String escribirTiempo(long time) {
+        min = (time / 10);
+        seg = (time - (min * 10));
 
+        //Si min es mayor de 0
+        if(min>0){
+            resultado.setPosition(280, 180);
+            //Escribimos los min
+            fin=min+" Min "+seg+" Seg";
         }else{
-            //si no hemos superado el minuto solo escribiremos los segundos
+            //si min es menor o igual 0 solo escribimos los seg
             fin=seg+" Seg";
         }
         //cambiamos la label del resultado con los datos obtenidos
         resultado.setText(fin);
         //Retornamos la label para poder disponer del String que guarda el tiempo
-        return fin;
-    }
-
-    public String getFin() {
         return fin;
     }
 }

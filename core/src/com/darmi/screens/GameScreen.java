@@ -179,7 +179,6 @@ public class GameScreen extends BaseScreen {
         time=this.delta/1000;
         if(choque){
             choque = false;
-//            game.gameOverScreen.escribirTiempo(time);
             game.setScreen(game.gameOverScreen);
         }
         tiempo.setText(game.gameOverScreen.escribirTiempo(time));
